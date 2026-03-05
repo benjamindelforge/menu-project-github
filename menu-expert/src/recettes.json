@@ -1,0 +1,116 @@
+[
+  {
+    "nom": "Pâtes Carbonara",
+    "ingredients": {
+      "Pâtes (g)": 500,
+      "Lardons (g)": 200,
+      "Oeufs": 3
+    }
+  },
+  {
+    "nom": "Poulet au Curry",
+    "ingredients": {
+      "Poulet (g)": 400,
+      "Lait de coco (ml)": 200,
+      "Riz (g)": 300
+    }
+  },
+  {
+    "nom": "Salade Tomate Mozza",
+    "ingredients": {
+      "Tomates": 4,
+      "Mozzarella": 2
+    }
+  },
+  {
+    "nom": "Gratin Dauphinois",
+    "ingredients": {
+      "Pommes de terre (kg)": 1,
+      "Crème (cl)": 50
+    }
+  },
+  {
+    "nom": "Omelette aux Champignons",
+    "ingredients": {
+      "Oeufs": 6,
+      "Champignons (g)": 250
+    }
+  },
+  {
+    "nom": "Risotto aux Asperges",
+    "ingredients": {
+      "Riz Arborio (g)": 300,
+      "Asperges": 10
+    }
+  },
+  {
+    "nom": "Burger Maison",
+    "ingredients": {
+      "Pain burger": 2,
+      "Steak haché": 2,
+      "Fromage": 2
+    }
+  },
+  {
+    "nom": "Quiche Lorraine",
+    "ingredients": {
+      "Pâte brisée": 1,
+      "Lardons (g)": 200,
+      "Oeufs": 4
+    }
+  },
+  {
+    "nom": "Couscous Express",
+    "ingredients": {
+      "Semoule (g)": 300,
+      "Légumes couscous": 1,
+      "Merguez": 4
+    }
+  },
+  {
+    "nom": "Saumon Grillé",
+    "ingredients": {
+      "Pavé de saumon": 2,
+      "Haricots verts (g)": 400
+    }
+  },
+  {
+    "nom": "Lasagnes Boeuf",
+    "ingredients": {
+      "Pâtes lasagnes": 1,
+      "Boeuf haché (g)": 500,
+      "Tomate (cl)": 50
+    }
+  },
+  {
+    "nom": "Soupe de Potiron",
+    "ingredients": {
+      "Potiron (kg)": 1,
+      "Crème (cl)": 20
+    }
+  },
+  {
+    "nom": "Tacos Poulet",
+    "ingredients": {
+      "Tortillas": 4,
+      "Poulet (g)": 300,
+      "Avocat": 1
+    }
+  },
+  {
+    "nom": "Ratatouille",
+    "ingredients": {
+      "Aubergine": 1,
+      "Courgette": 2,
+      "Poivron": 1
+    }
+  },
+  {
+    "nom": "Spaghetti Bolognaise",
+    "ingredients": {
+      "Pâtes (g)": 500,
+      "Sauce tomate": 1,
+      "Boeuf haché (g)": 400
+    }
+  }
+]
