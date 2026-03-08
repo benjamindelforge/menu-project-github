@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Menu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <nav class="sidebar">
+            <h2>My Menu</h2>
+            <ul>
+                <li>
+                    <button onclick="showPage('menu')">
+                        <span class="icon">📅</span>
+                        <span class="text">Menu de la semaine</span>
+                    </button>
+                </li>
+                <li>
+                    <button onclick="showPage('courses')">
+                        <span class="icon">🛒</span>
+                        <span class="text">Liste de courses</span>
+                    </button>
+                </li>
+                <li>
+                    <button onclick="showPage('recettes')">
+                        <span class="icon">📖</span>
+                        <span class="text">Recettes</span>
+                    </button>
+                </li>
+                <li>
+                    <button onclick="showPage('settings')">
+                        <span class="icon">⚙️</span>
+                        <span class="text">Paramètres</span>
+                    </button>
+                </li>
+                <li>
+                    <button onclick="showPage('settings')">
+                        <span class="icon">⚙️</span>
+                        <span class="text">Paramètres</span>
+                    </button>
+                </li>                
+            </ul>
+        </nav>
+        <button class="btn-home" onclick="showPage('home')">
+    <span class="icon">🏠</span>
+</button>
+
+        <main id="main-content">
+            <div id="page-display" class="card">
+                <h1>Bienvenue sur My Menu !</h1>
+                <p>Sélectionnez une option dans le menu à gauche pour commencer à organiser votre semaine.</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

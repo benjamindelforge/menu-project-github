@@ -1,0 +1,217 @@
+/* --- BASE & COULEURS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    height: 100vh;
+}
+
+.app-container {
+    display: flex;
+    height: 100%;
+}
+
+/* --- SIDEBAR DESIGN --- */
+.sidebar {
+    width: 300px;
+    background-color: #1a1a2e;
+    color: white;
+    padding: 25px 15px;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #4a90e2;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+/* --- LES BOUTONS "CADRES" AVEC ANIMATION --- */
+.sidebar button {
+    width: 100%;
+    background-color: #16213e; /* Fond des cadres */
+    border: 1px solid #0f3460;
+    color: white;
+    padding: 12px 20px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* L'animation quand on passe la souris (PC) */
+@media (hover: hover) {
+    .sidebar button:hover {
+        background-color: #4a90e2;
+        transform: scale(0.85);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+    }
+}
+
+.sidebar button .icon {
+    width: 50px;                 /* Largeur de la case de l'icone */
+    font-size: 1.7rem;           /* Taille de l'icone */
+    display: flex;               
+    /*background-color: rgba(255, 0, 0, 0.3);*/     /* Pour repérer la place que prend l'icone */
+    justify-content: center;     /* Centre l'émoji dans ces 50px */
+    flex-shrink: 0;              /* Empêche l'icône de s'écraser */
+}
+
+.sidebar button .text {
+    font-size: 1.5rem;  
+    font-weight: bold;
+    /*background-color: rgba(255, 0, 0, 0.3);*/
+    line-height: 1.1;
+    text-align: center;
+    margin-right: 24px;
+    flex: 1;
+}
+
+/* --- CONTENU PRINCIPAL --- */
+#main-content {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    background-color: rgba(255, 0, 0, 0.3);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+/* --- ADAPTATION MOBILE  --- */
+@media (max-width: 768px) {
+    #page-display {
+        width: 90% !important;   /* Elle prend 90% de l'espace restant à droite */
+        max-width: none;         /* On retire les limites du PC */
+        margin: 10px auto;       /* On la centre avec un petit espace en haut/bas */
+        padding: 20px 15px;      /* On réduit un peu le rembourrage interne pour gagner de la place texte */
+        box-sizing: border-box;  /* Pour que le padding ne fasse pas déborder la carte */
+    }
+    #page-display h1 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.5px; /* Resserre un peu les lettres pour un look plus pro */
+    align-items: center;
+    flex: 1;
+}
+    #main-content {
+        padding: 10px;           /* On réduit l'espace global autour de la carte */
+        display: flex;
+        justify-content: center; /* On s'assure que la carte est bien au milieu */
+    }
+    .sidebar {
+        width: 40vw !important;
+        min-width: 40vw !important;
+        padding: 20px 8px;
+    }
+
+    .sidebar h2 {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+
+    .sidebar button {
+    width: 100%;
+    background-color: #16213e; 
+    border: 1px solid #0f3460; 
+    color: white;
+    padding: 15px 2px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    justify-content: flex-start;
+
+    /* --- LA LIGNE MAGIQUE POUR RETIRER LE BLEU --- */
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    }
+
+    .sidebar button .text {
+    /* 1. On force la largeur à occuper tout l'espace restant */
+    width: 100%; 
+    display: block; 
+    min-width: 0;
+    flex: 1;
+    margin-right: 0;     /* Retire toute marge qui pousserait le rouge */
+    margin-left: 0;
+
+    /* 2. Tes réglages actuels */
+    font-size: 1.1rem !important;
+    font-weight: 800;
+    line-height: 1.1;
+    white-space: normal;
+    /*background-color: rgba(255, 0, 0, 0.3);*/
+    text-align: center;
+    }
+
+    /* Animation de clic simplifiée pour mobile */
+    .sidebar button:active {
+        transform: scale(0.85);
+        background-color: #4a90e2 !important;
+    }
+    .sidebar button .icon {
+    width: 30px;
+    font-size: 1rem; /* <--- Ajuste cette valeur pour réduire le logo */
+    flex-shrink: 0;   /* Garde cette ligne pour que le logo ne s'écrase pas */
+    /*background-color: rgba(255, 0, 0, 0.3);*/
+}
+.btn-home {
+    position: fixed;      /* Il reste fixé à l'écran */
+    bottom: 20px;         /* À 20px du bas */
+    left: 20px;           /* À 20px de la gauche */
+    
+    width: 60px;          /* Largeur et hauteur égales pour un cercle */
+    height: 60px;
+    border-radius: 50%;   /* C'est ça qui le rend parfaitement rond */
+    
+    background-color: #4a90e2; /* Une couleur qui flashe pour le différencier */
+    color: white;
+    border: none;
+    cursor: pointer;
+    
+    display: flex;        /* Pour centrer l'icône */
+    justify-content: center;
+    align-items: center;
+    
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Ombre plus forte pour le relief */
+    z-index: 9999;        /* Pour être sûr qu'il passe devant tout le reste */
+    
+    transition: transform 0.2s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn-home .icon {
+    font-size: 1.8rem;    /* On l'agrandit un peu */
+    margin: 0;            /* Pas de marge ici pour bien centrer */
+}
+
+/* Effet au clic */
+.btn-home:active {
+    transform: scale(0.9);
+}
+}
