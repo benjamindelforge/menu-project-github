@@ -8,12 +8,47 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f0f2f5;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .app-container {
     display: flex;
+    /* On retire height: 100% qui bloque tout */
+    min-height: 100vh;
+}
+/* 1. On empêche toute la page de défiler globalement */
+body, html {
+    margin: 0;
+    padding: 0;
     height: 100%;
+    overflow: hidden; /* Bloque le scroll global */
+}
+
+/* 2. On définit le conteneur principal comme une zone flexible de toute la hauteur */
+#app-container { /* Remplace par l'ID de ton conteneur parent si différent */
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* 3. La Sidebar : Elle prend toute la hauteur et scrolle si les boutons sont trop nombreux */
+.sidebar {
+    height: 100vh;
+    overflow-y: auto; /* Permet de scroller dans le menu si besoin */
+    flex-shrink: 0;   /* Empêche la sidebar de s'écraser */
+    position: sticky; /* Sécurité supplémentaire */
+    top: 0;
+}
+
+/* 4. Le Contenu Principal : C'est lui qui va "glisser" indépendamment */
+#main-content {
+    flex: 1;          /* Prend tout l'espace restant */
+    height: 100vh;
+    overflow-y: auto; /* Active le scroll uniquement ici */
+    -webkit-overflow-scrolling: touch; /* Scroll fluide sur iPhone */
+    /* Ajout d'une marge de sécurité interne en bas */
+    /* Cela crée un espace vide après le dernier repas pour que rien ne soit collé */
+    padding-bottom: 100px;
 }
 
 /* --- SIDEBAR DESIGN --- */
@@ -36,27 +71,26 @@ body {
     list-style: none;
 }
 
-/* --- LES BOUTONS "CADRES" AVEC ANIMATION --- */
+/* --- BOUTONS SIDEBAR --- */
 .sidebar button {
     width: 100%;
-    background-color: #16213e; /* Fond des cadres */
+    background-color: #16213e;
     border: 1px solid #0f3460;
     color: white;
-    padding: 12px 20px;
+    padding: 12px 0;
     margin-bottom: 15px;
     border-radius: 12px;
     cursor: pointer;
+
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    text-align: center;
-    padding-left: 0;
-    padding-right: 0;
+
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-/* L'animation quand on passe la souris (PC) */
+/* Hover uniquement sur PC */
 @media (hover: hover) {
     .sidebar button:hover {
         background-color: #4a90e2;
@@ -66,63 +100,182 @@ body {
 }
 
 .sidebar button .icon {
-    width: 50px;                 /* Largeur de la case de l'icone */
-    font-size: 1.7rem;           /* Taille de l'icone */
-    display: flex;               
-    /*background-color: rgba(255, 0, 0, 0.3);*/     /* Pour repérer la place que prend l'icone */
-    justify-content: center;     /* Centre l'émoji dans ces 50px */
-    flex-shrink: 0;              /* Empêche l'icône de s'écraser */
+    width: 50px;
+    font-size: 1.7rem;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
 .sidebar button .text {
-    font-size: 1.5rem;  
+    font-size: 1.5rem;
     font-weight: bold;
-    /*background-color: rgba(255, 0, 0, 0.3);*/
     line-height: 1.1;
     text-align: center;
     margin-right: 24px;
     flex: 1;
 }
 
+/* --- BOUTON HOME --- */
+.btn-home {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 9999;
+
+    transition: transform 0.2s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn-home .icon {
+    font-size: 1.8rem;
+}
+
+.btn-home:active {
+    transform: scale(0.9);
+}
+
 /* --- CONTENU PRINCIPAL --- */
 #main-content {
     flex: 1;
-    padding: 30px;
+    padding: 0px;
     overflow-y: auto;
 }
-
+#date-du-jour {
+    text-transform: capitalize; /* Majuscule sur le jour de la date du jour
+    text-align: center; /* Pour que la date soit aussi centrée sous ton titre */
+    margin-top: 10px;
+}
 .card {
     background: white;
-    padding: 25px;
+    padding-top: 20px;    /* Espace de sécurité en haut */
+    padding-bottom: 80px; /* Espace de sécurité en bas (plus large pour le mobile) */
+    padding-left: 15px;   /* Optionnel : évite que le texte colle aux bords */
+    padding-right: 15px;
+    min-height: 100vh;    /* S'assure que le contenu occupe toute la hauteur */
     border-radius: 15px;
     background-color: rgba(255, 0, 0, 0.3);
     box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    /* CORRECTIONS ICI */
+    height: auto;          /* Laisse la carte grandir selon le contenu */
+    min-height: 100%;      /* Optionnel : prend au moins toute la place */
+    overflow: visible;     /* Empêche le contenu de dépasser sans le fond */
+    display: block;        /* Assure un comportement de bloc standard */
+}
+.card h2 {
+    text-align: center;
+    width: 100%; /* S'assure que le titre prend toute la largeur pour bien se centrer */
+    margin-bottom: 10px; /* Optionnel : pour l'espace dont on parlait juste avant */
 }
 
-/* --- ADAPTATION MOBILE  --- */
-@media (max-width: 768px) {
-    #page-display {
-        width: 90% !important;   /* Elle prend 90% de l'espace restant à droite */
-        max-width: none;         /* On retire les limites du PC */
-        margin: 10px auto;       /* On la centre avec un petit espace en haut/bas */
-        padding: 20px 15px;      /* On réduit un peu le rembourrage interne pour gagner de la place texte */
-        box-sizing: border-box;  /* Pour que le padding ne fasse pas déborder la carte */
-    }
-    #page-display h1 {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.5px; /* Resserre un peu les lettres pour un look plus pro */
-    align-items: center;
-    flex: 1;
+/* Style pour le sélecteur de date */
+#calendar-input {
+    appearance: none; /* Supprime le look par défaut */
+    -webkit-appearance: none;
+    background-color: white;
+    color: #333;
+    border: none;
+    border-radius: 12px; /* Coins très arrondis */
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Ombre douce */
+    outline: none;
+    text-align: center;
 }
+.separator {
+    border: 0;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    margin: 20px 0;
+}
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.meal-select {
+    flex: 1; /* Le menu prend toute la place */
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.btn-refresh {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+/* On cible uniquement le conteneur du menu déroulant et du bouton */
+.meal-row .input-group {
+    margin-left: -15px; /* On annule les 15px de la card */
+    
+    /* Si tu veux laisser exactement 1px d'espace avec la sidebar : */
+    /* margin-left: -14px; */ 
+
+    /* On s'assure que le bloc prend toute la largeur disponible 
+       en compensant le décalage à droite si nécessaire */
+    width: calc(100% + 15px); 
+}
+.meal-row label {
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: #888;
+    display: block;
+    margin-bottom: 5px;
+    margin-left: 0;
+}
+
+
+/* =============================== */
+/* ========== MOBILE ============= */
+/* =============================== */
+
+@media (max-width: 768px) {
+
     #main-content {
-        padding: 10px;           /* On réduit l'espace global autour de la carte */
-        display: flex;
-        justify-content: center; /* On s'assure que la carte est bien au milieu */
+        padding: 0px;
+        display: block;
+        justify-content: center;
+        width: 100%;
     }
+
+    #page-display {
+        width: 90% !important;
+        margin: 10px auto;
+        padding: 20px 15px;
+    }
+
+    #page-display h1 {
+        font-family: 'Trebuchet MS', Arial, sans-serif;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+    }
+
     .sidebar {
-        width: 40vw !important;
-        min-width: 40vw !important;
+        width: 40vw;
+        min-width: 40vw;
         padding: 20px 8px;
     }
 
@@ -132,86 +285,53 @@ body {
     }
 
     .sidebar button {
-    width: 100%;
-    background-color: #16213e; 
-    border: 1px solid #0f3460; 
-    color: white;
-    padding: 15px 2px;
-    margin-bottom: 15px;
-    border-radius: 12px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    justify-content: flex-start;
-
-    /* --- LA LIGNE MAGIQUE POUR RETIRER LE BLEU --- */
-    -webkit-tap-highlight-color: transparent;
-    outline: none;
+        padding: 15px 2px;
+        -webkit-tap-highlight-color: transparent;
+        outline: none;
     }
 
     .sidebar button .text {
-    /* 1. On force la largeur à occuper tout l'espace restant */
-    width: 100%; 
-    display: block; 
-    min-width: 0;
-    flex: 1;
-    margin-right: 0;     /* Retire toute marge qui pousserait le rouge */
-    margin-left: 0;
-
-    /* 2. Tes réglages actuels */
-    font-size: 1.1rem !important;
-    font-weight: 800;
-    line-height: 1.1;
-    white-space: normal;
-    /*background-color: rgba(255, 0, 0, 0.3);*/
-    text-align: center;
+        font-size: 1.1rem;
+        font-weight: 800;
+        margin-right: 0;
+        width: 100%;
+        white-space: normal;
     }
 
-    /* Animation de clic simplifiée pour mobile */
+    .sidebar button .icon {
+        width: 30px;
+        font-size: 1rem;
+    }
+
     .sidebar button:active {
         transform: scale(0.85);
-        background-color: #4a90e2 !important;
+        background-color: #4a90e2;
     }
-    .sidebar button .icon {
-    width: 30px;
-    font-size: 1rem; /* <--- Ajuste cette valeur pour réduire le logo */
-    flex-shrink: 0;   /* Garde cette ligne pour que le logo ne s'écrase pas */
-    /*background-color: rgba(255, 0, 0, 0.3);*/
-}
-.btn-home {
-    position: fixed;      /* Il reste fixé à l'écran */
-    bottom: 20px;         /* À 20px du bas */
-    left: 20px;           /* À 20px de la gauche */
-    
-    width: 60px;          /* Largeur et hauteur égales pour un cercle */
-    height: 60px;
-    border-radius: 50%;   /* C'est ça qui le rend parfaitement rond */
-    
-    background-color: #4a90e2; /* Une couleur qui flashe pour le différencier */
-    color: white;
-    border: none;
-    cursor: pointer;
-    
-    display: flex;        /* Pour centrer l'icône */
-    justify-content: center;
-    align-items: center;
-    
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Ombre plus forte pour le relief */
-    z-index: 9999;        /* Pour être sûr qu'il passe devant tout le reste */
-    
-    transition: transform 0.2s;
-    -webkit-tap-highlight-color: transparent;
-}
 
-.btn-home .icon {
-    font-size: 1.8rem;    /* On l'agrandit un peu */
-    margin: 0;            /* Pas de marge ici pour bien centrer */
-}
+    .meal-row .input-group {
+        margin-left: -15px; /* On colle au bord gauche */
+        width: calc(100% + 15px); /* On occupe toute la largeur disponible */
+        display: flex;
+        align-items: center;
+        gap: 5px; /* Espace réduit entre le menu et le bouton 🔄 */
+    }
 
-/* Effet au clic */
-.btn-home:active {
-    transform: scale(0.9);
-}
+    .meal-select {
+        flex: 1; /* Le menu prend l'espace restant */
+        min-width: 0; /* Important pour forcer le texte à respecter la largeur */
+        
+        /* --- GESTION DU TEXTE LONG --- */
+        white-space: normal; /* Autorise le passage à la ligne */
+        height: auto; /* Permet au menu de s'agrandir en hauteur si besoin */
+        
+        /* AJUSTEMENTS POUR VISIBILITÉ DES PHRASES */
+        padding: 8px 2px; /* Réduit à 2px sur les côtés pour gagner de la place */
+        font-size: 0.8rem; /* Passage à 0.8rem pour éviter que le texte ne soit coupé */
+    }
+
+    .btn-refresh {
+        flex-shrink: 0; /* Empêche le bouton de s'écraser */
+        padding: 4px;
+        font-size: 1rem;
+    }
 }
